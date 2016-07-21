@@ -6,6 +6,7 @@ $(function() {
     };
     var watchID = navigator.geolocation.watchPosition(function(position) {
       console.log(position);
+      Android.sendLocation(position.coords);
     });
   }
 });
