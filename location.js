@@ -7,7 +7,7 @@ $(function() {
       console.log(position);
       try {
         if(position != null && position.coords != null)
-        Android.sendLocation({
+        Android.sendLocation(JSON.stringify({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           altitude: position.coords.altitude,
@@ -15,7 +15,7 @@ $(function() {
           altitudeAccuracy: position.coords.altitudeAccuracy,
           heading: position.coords.heading,
           speed: position.coords.speed
-        });
+        }));
       } catch(e) {
         console.error(e);
       }
