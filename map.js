@@ -68,7 +68,12 @@ function getGradientColor(start_color, end_color, percent) {
      diff_blue = '0' + diff_blue
 
    return '#' + diff_red + diff_green + diff_blue;
- };
+};
+
+function renderNetworkOverlayAgain() {
+  map.overlayMapTypes.removeAt(0); 
+  map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256)));
+}
 
 CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   var div = ownerDocument.createElement('div');
@@ -81,7 +86,8 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
 
   var carrier = $("#carrier").val();
   var network = $("#network").val();
-  var ssl = $("#ssl").val();
+  var ssl = $("#ssl").is(':checked');
+  var simulated = $("#simulated").is(':checked');
   var endpoint = api;
 
   if(network == "any") { network = null; }
@@ -93,7 +99,8 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
     "ne_lat": ne.lat,
     "ne_lng": ne.lng,
     "carrier": carrier,
-    "network": network
+    "network": network,
+    "simulated": simulated
   }, function(data) {
     var strength = parseFloat(data);
     if(strength) {
@@ -153,16 +160,16 @@ function initMap() {
 
             map.overlayMapTypes.insertAt(0, new CoordMapType(new google.maps.Size(256, 256)));
             $("#carrier").change(function() {
-              map.overlayMapTypes.removeAt(0); 
-              map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256))); 
+              renderNetworkOverlayAgain();
             });
             $("#network").change(function() {
-              map.overlayMapTypes.removeAt(0); 
-              map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256))); 
+              renderNetworkOverlayAgain();
             });
             $("#ssl").change(function() {
-              map.overlayMapTypes.removeAt(0); 
-              map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256)));
+              renderNetworkOverlayAgain();
+            });
+            $("#simulated").change(function() {
+              renderNetworkOverlayAgain();
             });
           }
         }
