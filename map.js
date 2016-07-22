@@ -1,5 +1,6 @@
 var map = null;
-var api = "172.20.168.194:9320";
+var api = "http://172.20.168.194:9320";
+var ssl_api = "https://172.20.168.194:9321";
 
 function CoordMapType(tileSize) {
   this.tileSize = tileSize;
@@ -80,9 +81,13 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
 
   var carrier = $("#carrier").val();
   var network = $("#network").val();
-  if(network == "any") { network = null; }
+  var ssl = $("#ssl").val();
+  var endpoint = api;
 
-  $.get("http://" + api + "/signal/network", {
+  if(network == "any") { network = null; }
+  if(ssl) { endpoint = ssl_api; }
+
+  $.get(endpoint + "/signal/network", {
     "sw_lat": sw.lat,
     "sw_lng": sw.lng,
     "ne_lat": ne.lat,
@@ -154,6 +159,10 @@ function initMap() {
             $("#network").change(function() {
               map.overlayMapTypes.removeAt(0); 
               map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256))); 
+            });
+            $("#ssl").change(function() {
+              map.overlayMapTypes.removeAt(0); 
+              map.overlayMapTypes.setAt(0, new CoordMapType(new google.maps.Size(256, 256)));
             });
           }
         }
