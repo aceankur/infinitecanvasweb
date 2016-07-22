@@ -147,7 +147,7 @@ function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
               zoom: 17,
               center: {lat: position.coords.latitude, lng: position.coords.longitude},
-              minZoom: 15,
+              minZoom: 12,
               maxZoom: 19
             });
 
