@@ -9,10 +9,27 @@
 </head>
 
 <body>
-<div id="map"></div>
+<div id="map">
+</div>
+<div id="filters">
+	<div>
+		<select id="carrier" name="carrier">
+			<option selected="selected" value="airtel">Airtel</option>
+			<option value="vodafone">Vodafone</option>
+		</select>
+	</div>
+	<div>
+		<select id="network" name="network">
+			<option selected="selected" value="any">Any Network</option>
+			<option value="2g">2G Network</option>
+			<option value="3g">3G Network</option>
+			<option value="4g">4G Network</option>			
+		</select>
+	</div>
+</div>
+
 	<!-- Replace the value of the key parameter with your own API key. -->
 	<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
-	<script src="location.js"></script>
 	<script src="map.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0dnLmnjV28zV4brCrKvJxCUfMEDBYRwA&callback=initMap"></script>
 </body>
