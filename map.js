@@ -1,6 +1,6 @@
 var map = null;
-var api = "http://172.20.168.194:9320";
-var ssl_api = "https://172.20.168.194:9321";
+var api = "http://192.168.1.13:9320";
+var ssl_api = "https://192.168.1.13:9321";
 
 function CoordMapType(tileSize) {
   this.tileSize = tileSize;
